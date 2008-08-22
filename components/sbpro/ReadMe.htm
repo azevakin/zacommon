@@ -1,0 +1,329 @@
+<HTML>
+<HEAD>
+<TITLE>ReadMe</TITLE>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+</HEAD>
+<BODY BGCOLOR="#FFFFFF" TEXT="#000000">
+<TABLE WIDTH="100%" BORDER="0" CELLSPACING="5" CELLPADDING="5" BGCOLOR="#660000">
+  <TR> 
+    <TD> 
+      <DIV ALIGN="CENTER"><FONT FACE="Verdana, Arial, Helvetica, sans-serif" SIZE="6" COLOR="#FFFFFF"><B>TStatusBarPro 
+        v1.73</B></FONT></DIV>
+    </TD>
+  </TR>
+</TABLE>
+<P><FONT FACE="Verdana, Arial, Helvetica, sans-serif" SIZE="2">Copyright &copy; 
+  <A HREF="mailto:kambiz@delphiarea.com">Kambiz R. Khojasteh</A>. All rights reserved.<BR>
+  Get future component updates from <A HREF="http://www.delphiarea.com">http://www.delphiarea.com</A>.<BR>
+</FONT></P>
+<TABLE BORDER="1" CELLSPACING="2" CELLPADDING="5" BORDERCOLOR="#FFFFFF" ALIGN="LEFT">
+  <TR BGCOLOR="#333333" ALIGN="CENTER" VALIGN="MIDDLE"> 
+    <TD NOWRAP><FONT FACE="Verdana, Arial, Helvetica, sans-serif" SIZE="2" COLOR="#FFFFFF"><B>Delphi 
+      3</B></FONT></TD>
+    <TD NOWRAP><FONT FACE="Verdana, Arial, Helvetica, sans-serif" SIZE="2" COLOR="#FFFFFF"><B>Delphi 
+      4</B></FONT></TD>
+    <TD NOWRAP><FONT FACE="Verdana, Arial, Helvetica, sans-serif" SIZE="2" COLOR="#FFFFFF"><B>Delphi 
+      5</B></FONT></TD>
+    <TD NOWRAP><FONT FACE="Verdana, Arial, Helvetica, sans-serif" SIZE="2" COLOR="#FFFFFF"><B>Delphi 
+      6</B></FONT></TD>
+    <TD NOWRAP><FONT FACE="Verdana, Arial, Helvetica, sans-serif" SIZE="2" COLOR="#FFFFFF"><B>Delphi 
+      7</B></FONT></TD>
+    <TD NOWRAP><FONT FACE="Verdana, Arial, Helvetica, sans-serif" SIZE="2" COLOR="#FFFFFF"><B>Delphi 2005 </B></FONT></TD>
+  </TR>
+</TABLE>
+<P><FONT FACE="Verdana, Arial, Helvetica, sans-serif"><BR>
+  <BR>
+  </FONT></P>
+<P><FONT FACE="Verdana, Arial, Helvetica, sans-serif" SIZE="4"><B><A NAME="DESCRIPTION"></A><BR>
+  DESCRIPTION</B></FONT></P>
+<BLOCKQUOTE> 
+  <P><FONT FACE="Verdana, Arial, Helvetica, sans-serif" SIZE="2">TStatusBarPro 
+    is an improved version of Delphi's TStatusBar. Each status panel in this status 
+    bar can have its own color, font, indent, image, hint, popup menu, click event 
+    and double click event. The size of each panel can be adjusted automatically 
+    by either content of the panel or relative to size of other panels. In addition, 
+    each panel of TStatusBarPro can accept another control as its child controls. 
+    </FONT> </P>
+  <P><FONT SIZE="2" FACE="Verdana, Arial, Helvetica, sans-serif"><B>Note</B>: 
+    TStatusBarPro is not a subclass of TStatusBar. This control is a modified 
+    version of TStatusBar.</FONT></P>
+</BLOCKQUOTE>
+<P><FONT FACE="Verdana, Arial, Helvetica, sans-serif" SIZE="4"><B><A NAME="ACKNOWLEDGMENT"></A><BR>
+  ACKNOWLEDGMENT</B></FONT></P>
+<BLOCKQUOTE> 
+  <P><FONT SIZE="2" FACE="Verdana, Arial, Helvetica, sans-serif">Special thanks 
+    to:</FONT></P>
+  <UL>
+    <LI><FONT FACE="Verdana, Arial, Helvetica, sans-serif" SIZE="2">Rudi Loos 
+      &lt;<A HREF="mailto:loos@intekom.co.za">loos@intekom.co.za</A>&gt; for adding 
+      <I>Color</I> property to the status panels.</FONT></LI>
+    <LI><FONT FACE="Verdana, Arial, Helvetica, sans-serif" SIZE="2">Alexander 
+      Alexishin &lt;<A HREF="mailto:sancho@han.kherson.ua">sancho@han.kherson.ua</A>&gt; 
+      for adding <I>AutoHintPanelIndex</I> properey and fixing a bug.</FONT></LI>
+    <LI><FONT FACE="Verdana, Arial, Helvetica, sans-serif" SIZE="2">Piet Vandenborre 
+      &lt;<A HREF="mailto:plsoft@pi.be">plsoft@pi.be</A>&gt; for fixing a bug.</FONT></LI>
+    <LI><FONT FACE="Verdana, Arial, Helvetica, sans-serif" SIZE="2">Viatcheslav 
+      V. Vassiliev &lt;<A HREF="mailto:vvv@spacenet.ru">vvv@spacenet.ru</A>&gt; 
+      for adding the <I>Control</I> property to the panels.</FONT></LI>
+    <LI><FONT FACE="Verdana, Arial, Helvetica, sans-serif" SIZE="2">Roland &lt;<A HREF="mailto:Beduerftig@SoftwareCreation.de">Beduerftig@SoftwareCreation.de</A>&gt; 
+      for fixing a bug.</FONT></LI>
+  </UL>
+</BLOCKQUOTE>
+<P><FONT FACE="Verdana, Arial, Helvetica, sans-serif"><B><A NAME="IMPROVEMENTS"></A><BR>
+  <FONT SIZE="4">IMPROVEMENTS<FONT SIZE="2"> (in comparison with TStatusBar)</FONT></FONT></B></FONT></P>
+<BLOCKQUOTE> 
+  <P><FONT FACE="Verdana, Arial, Helvetica, sans-serif" SIZE="2">TStatusBarPro 
+    has the following new properties in Delphi 4 or higher:</FONT></P>
+  <UL>
+    <LI><FONT FACE="Verdana, Arial, Helvetica, sans-serif"><B><FONT SIZE="2">Images: 
+      TCustomImageList<BR>
+      </FONT></B><FONT SIZE="2"> Holds a list of bitmaps that can be displayed 
+      on the panels of the control.<BR>
+      <BR>
+      </FONT></FONT></LI>
+    <LI><FONT FACE="Verdana, Arial, Helvetica, sans-serif" SIZE="2"><B>AutoHintPanelIndex: 
+      Integer<BR>
+      </B>When <I>AutoHint</I> property set to true, determines on which panel 
+      hint text appears.</FONT><FONT FACE="Verdana, Arial, Helvetica, sans-serif"><BR>
+      </FONT></LI>
+  </UL>
+  <P><FONT FACE="Verdana, Arial, Helvetica, sans-serif" SIZE="2">TStatusBarPro 
+    has the following new properties in Delphi 3:</FONT></P>
+  <UL>
+    <LI><FONT FACE="Verdana, Arial, Helvetica, sans-serif" SIZE="2"><B>Images: 
+      TImageList<BR>
+      </B> Holds a list of bitmaps that can be displayed on the panels of the 
+      control.</FONT><FONT FACE="Verdana, Arial, Helvetica, sans-serif"><BR>
+      <FONT SIZE="2"><BR>
+      </FONT></FONT></LI>
+    <LI><FONT FACE="Verdana, Arial, Helvetica, sans-serif"><B><FONT SIZE="2">Color: 
+      TColor<BR>
+      </FONT></B><FONT SIZE="2"> Specifies the background color of the control.<BR>
+      <BR>
+      </FONT></FONT></LI>
+    <LI><FONT FACE="Verdana, Arial, Helvetica, sans-serif"><B><FONT SIZE="2">UseSystemFont: 
+      Boolean<BR>
+      </FONT></B><FONT SIZE="2"> Specifies whether the status bar uses the system 
+      font.</FONT></FONT></LI>
+  </UL>
+  <P><FONT FACE="Verdana, Arial, Helvetica, sans-serif" SIZE="2">Type of the following 
+    event has changed:</FONT></P>
+  <UL>
+    <LI><FONT FACE="Verdana, Arial, Helvetica, sans-serif" SIZE="2"><B>OnDrawPanel: 
+      TDrawPanelProEvent<BR>
+      </B> <B>TDrawPanelProEvent = procedure(StatusBar: TStatusBarPro; Panel: 
+      TStatusPanelPro; const Rect: TRect) of object<BR>
+      </B> Occurs when an owner draw panel needs to be redrawn. </FONT></LI>
+  </UL>
+  <P><FONT FACE="Verdana, Arial, Helvetica, sans-serif" SIZE="2">Type of the following 
+    property has changed:</FONT></P>
+  <UL>
+    <LI><FONT FACE="Verdana, Arial, Helvetica, sans-serif" SIZE="2"><B>Panels: 
+      TStatusPanelsPro<BR>
+      </B>Contains lists of the status bar's panels (TStatusPanelPro).</FONT></LI>
+  </UL>
+  <P><FONT FACE="Verdana, Arial, Helvetica, sans-serif" SIZE="2">Each panel (TStatusPanelPro) 
+    has the following new properties:</FONT></P>
+  <UL>
+    <LI><FONT FACE="Verdana, Arial, Helvetica, sans-serif"><B><FONT SIZE="2">AutoSize: 
+      Boolean<BR>
+      </FONT></B><FONT SIZE="2">Determines whether the width of the panel should 
+      be automatically adjusted according to the StatusBarPro's size.</FONT><FONT FACE="Verdana, Arial, Helvetica, sans-serif" SIZE="2"> 
+      Setting this property to True, with set the AutoWidth property to False.</FONT><FONT SIZE="2"><BR>
+      <B><BR>
+      </B></FONT></FONT></LI>
+    <LI><FONT FACE="Verdana, Arial, Helvetica, sans-serif"><B><FONT SIZE="2">AutoWidth: 
+      Boolean<BR>
+      </FONT></B><FONT SIZE="2">Determines whether the width of the panel should 
+      be automatically adjusted according to the content of the panel. Setting 
+      this property to True, with set the AutoSize property to False.<BR>
+      <BR>
+      </FONT></FONT><FONT FACE="Verdana, Arial, Helvetica, sans-serif" SIZE="2"><B> 
+      Color: TColor<BR>
+      </B> Specifies the background color of the panel.<BR>
+      <BR>
+      </FONT></LI>
+    <LI><FONT FACE="Verdana, Arial, Helvetica, sans-serif" SIZE="2"><B>ParentColor: 
+      Boolean<BR>
+      </B> Determines whether the panel uses the color of the TStatusBarPro that 
+      owns it.<BR>
+      <BR>
+      </FONT></LI>
+    <LI><FONT FACE="Verdana, Arial, Helvetica, sans-serif" SIZE="2"><B>ImageIndex: 
+      Integer<BR>
+      </B> Determines index of the image (from the TStatusBarPro.Images) that 
+      appears on the panel.<BR>
+      <BR>
+      </FONT></LI>
+    <LI><FONT FACE="Verdana, Arial, Helvetica, sans-serif" SIZE="2"><B>Indent: 
+      Integer<BR>
+      </B> Specifies how far the panel's contents (image and text) are indented.<BR>
+      <BR>
+      </FONT></LI>
+    <LI><FONT FACE="Verdana, Arial, Helvetica, sans-serif" SIZE="2"><B>Font: TFont</B><BR>
+      Specifies the font to use when writing text on the panel.<BR>
+      <BR>
+      </FONT></LI>
+    <LI><FONT FACE="Verdana, Arial, Helvetica, sans-serif" SIZE="2"><B>MaxWidth: 
+      Integer</B><BR>
+      Specifies the maximum size of the panel in pixels. When the AutoSize property 
+      is True, changing this propery has no effect.<BR>
+      <BR>
+      </FONT></LI>
+    <LI><FONT FACE="Verdana, Arial, Helvetica, sans-serif" SIZE="2"><B>MinWidth: 
+      Integer</B><BR>
+      Specifies the minimum size of the panel in pixels. When the AutoSize property 
+      is True, changing this propery has no effect.<BR>
+      <BR>
+      </FONT></LI>
+    <LI><FONT FACE="Verdana, Arial, Helvetica, sans-serif" SIZE="2"><B>ParentFont: 
+      Boolean</B><BR>
+      Determines where the panel looks for its font information.<BR>
+      <BR>
+      </FONT></LI>
+    <LI><FONT FACE="Verdana, Arial, Helvetica, sans-serif" SIZE="2"><B>Hint: String<BR>
+      </B> Contains the text string that can appear when the user moves the mouse 
+      over the panel. If this property set to blank, hint property of TStatusBarPro 
+      will be used.<BR>
+      <BR>
+      </FONT></LI>
+    <LI><FONT FACE="Verdana, Arial, Helvetica, sans-serif" SIZE="2"><B>PopupMenu: 
+      TPopupMenu<BR>
+      </B> Identifies the pop-up menu associated with the panel. If this property 
+      set to nil, PopupMenu property of TStatusBarPro will be used.<BR>
+      <BR>
+      </FONT></LI>
+    <LI><FONT FACE="Verdana, Arial, Helvetica, sans-serif" SIZE="2"><B>Control: 
+      TControl</B><BR>
+      Determines the control that is assigned to the panel. When a control assigns 
+      to this property, the parent of the control changes to the status bar and 
+      the control covers the panel's bounding rectangle.<BR>
+      </FONT></LI>
+  </UL>
+  <P><FONT FACE="Verdana, Arial, Helvetica, sans-serif" SIZE="2">Each panel (TStatusPanelPro) 
+    has the following new events:</FONT></P>
+  <UL>
+    <LI><FONT FACE="Verdana, Arial, Helvetica, sans-serif" SIZE="2"><B>OnClick: 
+      TNotifyEvent<BR>
+      </B> Occurs when the use click the panel. If this event is unassigned, the 
+      OnClick event of TStatusBarPro will be fired.<BR>
+      <BR>
+      </FONT></LI>
+    <LI><FONT FACE="Verdana, Arial, Helvetica, sans-serif" SIZE="2"><B>OnDblClick: 
+      TNotifyEvent<BR>
+      </B> Occurs when the user double-clicks the primary mouse button when the 
+      mouse pointer is over the panel. If this event is unassigned, the OnDblClick 
+      event of TStatusBarPro will be fired.</FONT></LI>
+  </UL>
+</BLOCKQUOTE>
+<P><FONT FACE="Verdana, Arial, Helvetica, sans-serif"><B><A NAME="HISTORY"></A><BR>
+  <FONT SIZE="4">HISTORY</FONT></B></FONT></P>
+<UL>
+  <LI><FONT FACE="Verdana, Arial, Helvetica, sans-serif" SIZE="2"><B>1.73 (June 
+    28, 2004)</B><BR>
+    - The mis-positioning of panels' control when the parent form was resized 
+    by dragging of its corners, is resolved.<BR>
+    - Now, control of the panels will be hidden when SimplePanel property is True.<BR>
+    <BR>
+    </FONT></LI>
+  <LI><FONT FACE="Verdana, Arial, Helvetica, sans-serif" SIZE="2"><B>1.72 (June 
+    16, 2004)</B><BR>
+    - A bug fixed.<BR>
+    <BR>
+    </FONT></LI>
+  <LI><FONT FACE="Verdana, Arial, Helvetica, sans-serif" SIZE="2"><B>1.71 (February 
+    27, 2004)</B><BR>
+    - A minor bug fixed.<BR>
+    <BR>
+    </FONT></LI>
+  <LI><FONT FACE="Verdana, Arial, Helvetica, sans-serif" SIZE="2"><B>1.70 (August 
+    15, 2003)</B><BR>
+    </FONT><FONT FACE="Verdana, Arial, Helvetica, sans-serif" SIZE="2">- The new 
+    properties MinWidth, MaxWidth, and AutoWidth added to each panel.<BR>
+    <BR>
+    </FONT></LI>
+  <LI><FONT FACE="Verdana, Arial, Helvetica, sans-serif" SIZE="2"><B>1.60 (July 
+    5, 2003)</B><BR>
+    - New property Control added to each panel (Thanks to</FONT> <FONT FACE="Verdana, Arial, Helvetica, sans-serif" SIZE="2"><A HREF="mailto:vvv@spacenet.ru">Viatcheslav 
+    V. Vassiliev</A>).<BR>
+    </FONT><FONT FACE="Verdana, Arial, Helvetica, sans-serif" SIZE="2"><B><BR>
+    </B></FONT></LI>
+  <LI><FONT FACE="Verdana, Arial, Helvetica, sans-serif" SIZE="2"><B> 1.50 (May 
+    3, 2003)<BR>
+    </B>- New properties <I>Indent</I>, <I>Font</I>, and <I>ParentFont</I> added 
+    to each panel.<B><BR>
+    <BR>
+    </B></FONT></LI>
+  <LI><FONT FACE="Verdana, Arial, Helvetica, sans-serif" SIZE="2"><B> 1.40 (November 
+    19, 2002)</B><BR>
+    - New property <I>AutoSize</I> added to each panel.<BR>
+    - Bug in painting panels fixed (Thanks to <A HREF="mailto:sancho@han.kherson.ua">Alexander 
+    Alexishin</A> and <A HREF="mailto:plsoft@pi.be">Piet Vandenborre</A>)</FONT><FONT FACE="Verdana, Arial, Helvetica, sans-serif"><BR>
+    <BR>
+    </FONT></LI>
+  <LI> <FONT FACE="Verdana, Arial, Helvetica, sans-serif" SIZE="2"><B>1.30 (November 
+    16, 2002)</B><BR>
+    - New property <I>ParentColor</I> added to each panel.<B><BR>
+    </B></FONT><FONT FACE="Verdana, Arial, Helvetica, sans-serif"><BR>
+    </FONT></LI>
+  <LI><FONT FACE="Verdana, Arial, Helvetica, sans-serif" SIZE="2"><B> 1.20 (September 
+    3, 2002)</B><BR>
+    - New property <I>AutoHintPanelIndex</I> added (Thanks to <A HREF="mailto:sancho@han.kherson.ua">Alexander 
+    Alexishin</A>).<BR>
+    </FONT><FONT FACE="Verdana, Arial, Helvetica, sans-serif"><BR>
+    </FONT></LI>
+  <LI><FONT FACE="Verdana, Arial, Helvetica, sans-serif"><B><FONT SIZE="2">1.12 
+    (July 6, 2002)</FONT></B><FONT SIZE="2"><BR>
+    - A minor bug fixed.<BR>
+    <BR>
+    </FONT></FONT></LI>
+  <LI><FONT FACE="Verdana, Arial, Helvetica, sans-serif" SIZE="2"><B>1.11 (December 
+    27, 2001)<BR>
+    </B> - Support of Delphi 6 added.<BR>
+    <BR>
+    </FONT></LI>
+  <LI><FONT FACE="Verdana, Arial, Helvetica, sans-serif" SIZE="2"><B>1.10 (September 
+    24, 2000)<BR>
+    </B> - <I>Color</I> property added to each panel (Thanks to <A HREF="mailto:loos@intekom.co.za">Rudi 
+    Loos</A>). <BR>
+    <BR>
+    </FONT></LI>
+  <LI><FONT FACE="Verdana, Arial, Helvetica, sans-serif"><B><FONT SIZE="2">1.00 
+    (March 8, 2000)<BR>
+    </FONT></B><FONT SIZE="2"> - Initial release.<BR>
+    </FONT></FONT></LI>
+</UL>
+<P><FONT FACE="Verdana, Arial, Helvetica, sans-serif"><B><A NAME="LICENSE"></A><BR>
+  <FONT SIZE="4">LICENSE</FONT></B></FONT></P>
+<BLOCKQUOTE> 
+  <P><FONT FACE="Verdana, Arial, Helvetica, sans-serif" SIZE="2">TStatusBarPro 
+    component is freeware. You may copy component's files AS LONG AS YOU COPY 
+    ALL OF THEM. If you want to change the source code in order to improve the 
+    component's features, performance, etc. please send me the new source code 
+    so that I can have a look at it. The changed source code should contain descriptions 
+    what you have changed, and of course your name. The only thing you MAY NOT 
+    CHANGE is the ORIGINAL COPYRIGHT INFORMATION. </FONT></P>
+</BLOCKQUOTE>
+<P><FONT FACE="Verdana, Arial, Helvetica, sans-serif"><B><A NAME="DISCLAIMER"></A><BR>
+  </B> <B> <FONT SIZE="4">DISCLAIMER</FONT></B></FONT></P>
+<BLOCKQUOTE> 
+  <P><FONT FACE="Verdana, Arial, Helvetica, sans-serif" SIZE="2">TStatusBarPro 
+    is provided &quot;AS IS&quot; without any warranty of any kind, either express 
+    or implied. The entire risk as to the quality and performance of the software 
+    is with you. The author is NOT liable for any DAMAGES resulting from the use 
+    and misuse of the component, especially he is NOT liable for DAMAGES that 
+    were caused BY ANY VERSION WHICH HAS NOT BEEN PROGRAMMED BY THE AUTHOR HIMSELF.</FONT></P>
+</BLOCKQUOTE>
+<FONT FACE="Verdana, Arial, Helvetica, sans-serif"><BR>
+</FONT> 
+<TABLE WIDTH="100%" BORDER="0" CELLSPACING="0" CELLPADDING="0">
+  <TR> 
+    <TD WIDTH="100%"> 
+      <HR NOSHADE>
+    </TD>
+    <TD NOWRAP><FONT FACE="Verdana, Arial, Helvetica, sans-serif" SIZE="1"><SUP>&nbsp;END 
+      OF DOCUMENT</SUP></FONT></TD>
+  </TR>
+</TABLE>
+</BODY>
+</HTML>

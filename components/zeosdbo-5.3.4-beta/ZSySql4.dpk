@@ -1,0 +1,44 @@
+package ZSySql4;
+
+{$R *.RES}
+{$ALIGN ON}
+{$ASSERTIONS ON}
+{$BOOLEVAL OFF}
+{$DEBUGINFO ON}
+{$EXTENDEDSYNTAX ON}
+{$IMPORTEDDATA ON}
+{$IOCHECKS ON}
+{$LOCALSYMBOLS ON}
+{$LONGSTRINGS ON}
+{$OPENSTRINGS ON}
+{$OPTIMIZATION ON}
+{$OVERFLOWCHECKS OFF}
+{$RANGECHECKS OFF}
+{$REFERENCEINFO ON}
+{$SAFEDIVIDE OFF}
+{$STACKFRAMES OFF}
+{$TYPEDADDRESS OFF}
+{$VARSTRINGCHECKS ON}
+{$WRITEABLECONST ON}
+{$MINENUMSIZE 1}
+{$IMAGEBASE $00400000}
+{$DESCRIPTION 'Zeos Sybase SQL Components'}
+{$IMPLICITBUILD OFF}
+
+requires
+  Vcl40,
+  Vcldb40,
+  ZCommon4,
+  ZDbware4;
+
+contains
+  ZSySqlTr in 'dbase\ZSySqlTr.pas',
+  ZLibSySql in 'dbase\ZLibSySql.pas',
+  ZSySqlCon in 'dbase\ZSySqlCon.pas',
+  ZSySqlProp in 'dbase\ZSySqlProp.pas',
+  ZSySqlQuery in 'dbase\ZSySqlQuery.pas',
+  ZSySqlReg in 'dbase\ZSySqlReg.pas',
+  ZDirSySql in 'dbase\ZDirSySql.pas',
+  ZSySqlStoredProc in 'dbase\ZSySqlStoredProc.pas';
+
+end.
