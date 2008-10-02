@@ -16,8 +16,6 @@ type
     procedure InitSize;
     procedure SetText(const Value: String);
     procedure SetPadding(const Value: Integer);
-  protected
-    procedure doShow; override;
   public
     constructor Create(AOwner: TComponent); overload; override;
     constructor Create(AOwner: TComponent; AText: String); reintroduce; overload;
@@ -107,10 +105,6 @@ begin
     FPadding := Value;
     InitSize;
   end;
-end;
-
-procedure TBobDlg.doShow;
-begin
 end;
 
 procedure TBobDlg.ShowMessage(const AText: String);
