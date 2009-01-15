@@ -2,7 +2,7 @@ unit ZAWebUtils;
 
 interface
 
-uses Classes, ZAClasses, SHDocVw; //, ComCtrls, OleCtrls, ZAClasses;
+uses Classes, ZAClasses, SHDocVw;
 
 type
   THtmlDocument = class(TPgSqlClass)
@@ -22,8 +22,6 @@ type
     procedure AddTR(TDvalues: array of string; const IsHeader: Boolean=False); overload;
     procedure AddTR(TDvalues, TDalign: array of string;
       const IsHeader: Boolean=False); overload;
-//    procedure AddTR(const TD; const Level, ColCount: Integer); overload;
-//    procedure AddTR(const TH, TD; Sizes: array of string); overload;
     procedure AddTRwTDs(TDs: array of string);
     procedure AddHeader(const Value: string; const ColCount: Integer); overload;
     procedure AddHeader(const ClassName, Value: string; const ColCount: Integer); overload;
@@ -32,7 +30,6 @@ type
     procedure BeginTableBordered;
     procedure EndDocument;
     procedure EndTable;
-//    function TD(const Value: string; ColSpan: Integer): string; overload;
     function TD(const Value, Align: string; const ColSpan, RowSpan: Byte): string; overload;
     function TD(const Value: string; const ColSpan, RowSpan: Byte): string; overload;
     function TH(const Value, Align: string; const ColSpan, RowSpan: Byte): string; overload;
