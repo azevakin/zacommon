@@ -80,7 +80,7 @@ end;
 { TPgSqlForm }
 
 const
-  e_duplicate_unique_constraint = 'duplicate key violates unique constraint';
+  e_duplicate_unique_constraint = 'duplicate key';
   duplicate_unique_constraint = 'ОШИБКА: Попытка ввода дубликата.'#13'Запись с данными параметрами уже существует.';
 
 constructor TPgSqlForm.Create(AOwner: TComponent;
