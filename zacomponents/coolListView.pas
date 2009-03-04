@@ -71,13 +71,11 @@ end;
 
 procedure TCoolListView.CheckItem(listItem: TListItem);
 begin
-  listItem.Checked := True;
   FCheckedItems.Add(listItem);
 end;
 
 procedure TCoolListView.UncheckItem(listItem: TListItem);
 begin
-  listItem.Checked := False;
   FCheckedItems.Delete(FCheckedItems.IndexOf(listItem));
 end;
 
@@ -154,8 +152,14 @@ end;
 
 procedure TCoolListView.KeyDown(var Key: Word; Shift: TShiftState);
 begin
-  if Key = VK_SPACE then Key := Ord(#0);
   inherited;
+  if Assigned(Selected) and (Key = VK_SPACE) then
+  begin
+    if IsChecked(Selected) then
+      UncheckItem(Selected)
+    else
+      CheckItem(Selected);
+  end;
 end;
 
 procedure TCoolListView.deleteCheckedItems;

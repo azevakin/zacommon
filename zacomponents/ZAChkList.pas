@@ -65,9 +65,12 @@ type
     destructor Destroy; override;
     function CheckedCount: Integer;
     property Checked[Index: Integer]: Boolean read GetChecked write SetChecked;
+    procedure Items_Clear;
     property ItemEnabled[Index: Integer]: Boolean read GetItemEnabled write SetItemEnabled;
     property State[Index: Integer]: TCheckBoxState read GetState write SetState;
     property Header[Index: Integer]: Boolean read GetHeader write SetHeader;
+    procedure CheckAll;
+    procedure UnCheckAll;
   published
     property OnClickCheck: TNotifyEvent read FOnClickCheck write FOnClickCheck;
     property Align;
@@ -427,14 +430,11 @@ begin
 end;
 
 procedure TZAChkListBox.SetChecked(Index: Integer; AChecked: Boolean);
+const
+  cb_states: array[Boolean] of TCheckBoxState = (cbUnchecked, cbChecked);
 begin
   if AChecked <> GetChecked(Index) then
-  begin
-    if AChecked then
-      SetState(Index, cbChecked)
-    else
-      SetState(Index, cbUnchecked);
-  end;
+    SetState(Index, cb_states[AChecked]);
 end;
 
 procedure TZAChkListBox.SetItemEnabled(Index: Integer; const Value: Boolean);
@@ -447,17 +447,16 @@ begin
 end;
 
 procedure TZAChkListBox.SetState(Index: Integer; AState: TCheckBoxState);
+const
+  delta: array[TCheckBoxState] of Shortint = (-1, 1, -1);
 begin
   if AState <> GetState(Index) then
   begin
+    if AState <> TCheckListBoxDataWrapper(GetWrapper(Index)).State then
+      Inc(FCheckedCount, delta[AState]);
+
     TCheckListBoxDataWrapper(GetWrapper(Index)).State := AState;
     InvalidateCheck(Index);
-
-    if AState = cbChecked then
-      Inc(FCheckedCount)
-    else
-      if FCheckedCount > 0 then
-        Dec(FCheckedCount);
   end;
 end;
 
@@ -682,8 +681,29 @@ begin
   Result := FCheckedCount;
 end;
 
+procedure TZAChkListBox.Items_Clear;
+begin
+  Items.Clear;
+  FCheckedCount := 0;
+end;
+
+procedure TZAChkListBox.CheckAll;
+var
+  I: Integer;
+begin
+  for I := 0 to Items.Count - 1 do
+    Checked[I] := True;
+end;
+
+procedure TZAChkListBox.UnCheckAll;
+var
+  I: Integer;
+begin
+  for I := 0 to Items.Count - 1 do
+    Checked[I] := False;
+end;
+
 initialization
   GetCheckSize;
 
 end.
-
