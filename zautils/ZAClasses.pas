@@ -5,6 +5,9 @@ interface
 uses Classes, DB, ZConvert, ZPgSqlCon, ZPgSqlTr, ZPgSqlQuery;
 
 type
+  TFilterResult = (frAll, frOne, frSome);
+
+type
   TRealValue = class;
 
   THashExtended = class(TStringList)

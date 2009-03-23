@@ -27,6 +27,9 @@ interface
   procedure WBox(const Text: String);
   procedure WBoxFmt(const S: string; const Args: array of const);
 
+const
+  s_no_data_for_report = 'Нет данных для отображения';
+
 implementation
 
 uses Forms, SysUtils, Windows;
