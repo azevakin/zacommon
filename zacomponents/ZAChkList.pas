@@ -140,11 +140,85 @@ type
     property OnStartDrag;
   end;
 
+function GetValues(lb: TZAChkListBox): string;
+function GetValue(lb: TZAChkListBox): string;
+function GetIDs(lb: TZAChkListBox): string;
+function GetID(lb: TZAChkListBox): Integer;
 procedure Register;
 
 implementation
 
-uses Consts, RTLConsts, Themes;
+uses Consts, RTLConsts, Themes, ZAConst, ZAClasses;
+
+function GetID(lb: TZAChkListBox): Integer;
+var
+  I, Len: Integer;
+
+begin
+  Len := lb.Count-1;
+  Result := 0;
+
+  for I := 0 to Len do
+    if lb.Checked[I] then
+    begin
+      Result := TID(lb.Items.Objects[I]).ID;
+      Break;
+    end;
+end;
+
+function GetIDs(lb: TZAChkListBox): string;
+const
+  Separator = ',';
+
+var
+  I, Len: Integer;
+
+begin
+  Len := lb.Count-1;
+  Result := SNull;
+
+  for I := 0 to Len do
+    if lb.Checked[I] then
+      Result := Result + IntToStr(TID(lb.Items.Objects[I]).ID) + Separator;
+
+  if Result <> SNull then
+    Delete(Result, Length(Result), 1);
+end;
+
+function GetValue(lb: TZAChkListBox): string;
+var
+  I, Len: Integer;
+
+begin
+  Len := lb.Count-1;
+  Result := SNull;
+
+  for I := 0 to Len do
+    if lb.Checked[I] then
+    begin
+      Result := lb.Items[I];
+      Break;
+    end;
+end;
+
+function GetValues(lb: TZAChkListBox): string;
+const
+  Separator = ', ';
+
+var
+  I, Len: Integer;
+
+begin
+  Len := lb.Count-1;
+  Result := SNull;
+
+  for I := 0 to Len do
+    if lb.Checked[I] then
+      Result := Result + lb.Items[I] + Separator;
+
+  if Result <> SNull then
+    Delete(Result, Length(Result)-1, 2);
+end;
 
 procedure Register;
 begin
