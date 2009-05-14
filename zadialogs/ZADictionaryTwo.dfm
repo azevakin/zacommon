@@ -10,11 +10,6 @@ inherited DictionaryTwoDlg: TDictionaryTwoDlg
       end
     end
     inherited pnlButtons: TPanel
-      inherited pnlOther: TPanel
-        inherited btnDelete: TButton
-          OnClick = btnDeleteClick
-        end
-      end
       inherited pnlEdit: TPanel
         inherited btnEdit: TButton
           OnClick = btnEditClick
@@ -25,12 +20,16 @@ inherited DictionaryTwoDlg: TDictionaryTwoDlg
           OnClick = btnAddClick
         end
       end
+      inherited pnlDelete: TPanel
+        inherited btnDelete: TButton
+          OnClick = btnDeleteClick
+        end
+      end
     end
   end
   inherited pnlLeft: TPanel
     inherited pnlValues: TPanel
       inherited lvValues: TListView
-        Height = 218
         Columns = <
           item
             AutoSize = True

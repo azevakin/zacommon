@@ -232,8 +232,8 @@ end;
 procedure TDictionaryTwoDlg.btnDeleteClick(Sender: TObject);
 begin
   inherited;
-  if IsPositiveResult(CBoxFmt(SDeleteConfirm, [SelectedValue]))
-    then DeleteValue;
+  if CBoxFmtB(SDeleteConfirm, [SelectedValue]) then
+    DeleteValue;
 end;
 
 end.

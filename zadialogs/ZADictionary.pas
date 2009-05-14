@@ -218,8 +218,8 @@ begin
   if ListBox.ItemIndex = NullIndex then
     WBox(SWarningSelect)
   else
-    if IsPositiveResult(CBoxFmt('Удалить "%s"?', [selectedText]))
-      then deleteValue;
+    if CBoxFmtB('Удалить "%s"?', [selectedText]) then
+      deleteValue;
 end;
 
 procedure TDictionaryDlg.btnInsertClick(Sender: TObject);
