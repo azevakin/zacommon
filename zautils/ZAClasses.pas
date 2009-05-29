@@ -142,6 +142,13 @@ type
     property Value[Index: Integer]: string read GetValue write SetValue;
   end;
 
+  TIdPlus = class
+    id: Integer;
+    value: string;
+  public
+    constructor Create(const fields: TFields; const id: Integer; const value: Integer);
+  end;
+
   TParams = DB.TParams;
 
   TField = DB.TField;
@@ -604,6 +611,14 @@ end;
 procedure THashInt.SetLast(const Value: Integer);
 begin
   ByIndex[Count-1] := Value;
+end;
+
+{ TIdPlus }
+
+constructor TIdPlus.Create(const fields: TFields; const id: Integer; const value: Integer);
+begin
+  Self.id := fields[id].AsInteger;
+  Self.value := fields[value].AsString;
 end;
 
 end.
