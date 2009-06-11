@@ -599,8 +599,14 @@ end;
 
 procedure THashInt.PutByKey(const Key: string;
   const Value: Integer);
+var
+  idx: Integer;
 begin
-  TID(Objects[IndexOf(Key)]).Id := Value;
+  idx := IndexOf(Key);
+  if idx = -1 then
+    AddObject(Key, TID.Create(Value))
+  else
+    TID(Objects[idx]).Id := Value;
 end;
 
 procedure THashInt.SetFirst(const Value: Integer);
