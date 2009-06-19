@@ -106,9 +106,12 @@ begin
 end;
 
 function TPgSqlForm.ExecQuery(const SQL: string; const Args: array of const): TZPgSqlQuery;
+var
+  opt: TFormatSettings;
 begin
+  opt.DecimalSeparator := '.';
   Result := NewQuery;
-  Result.Sql.Add(Format(SQL, Args));
+  Result.Sql.Add(Format(SQL, Args, opt));
   try
     Screen.Cursor := crHourGlass;
     try
