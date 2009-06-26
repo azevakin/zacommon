@@ -3,7 +3,7 @@ unit ZASelectDlg;
 interface
 
 uses
-  Classes, Messages, Controls, Forms, StdCtrls, ExtCtrls, ComCtrls, ZAPgSqlForm;
+  Classes, Messages, Controls, Forms, StdCtrls, ComCtrls, ZAPgSqlForm;
 
 type
   TWithID = (withIntegerID, withStringID, withoutID);

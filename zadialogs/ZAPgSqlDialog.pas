@@ -14,6 +14,7 @@ type
   protected
     procedure AlignCenter;
     procedure DoShow; override;
+    procedure DoDestroy; override;
   public
     property RegistryKey: string read FRegistryKey write FRegistryKey;
     //=========================================================================
@@ -24,7 +25,6 @@ type
     //=========================================================================
     // Показывает модальный диалог.
     //=========================================================================
-    destructor Destroy; override;
   end;
 
 implementation
@@ -39,7 +39,7 @@ const
   HeightValue = 'Height';
   WidthValue = 'Width';
 
-destructor TPgSqlDlg.Destroy;
+procedure TPgSqlDlg.DoDestroy;
 begin
   saveSettings;
   inherited;
