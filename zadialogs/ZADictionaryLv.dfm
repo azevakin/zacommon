@@ -21,7 +21,7 @@ inherited DictionaryLvDlg: TDictionaryLvDlg
         Top = 20
         Width = 35
         Height = 13
-        Caption = 'Поиск:'
+        Caption = #1055#1086#1080#1089#1082':'
         FocusControl = edtSearch
       end
       object edtSearch: TEdit
@@ -52,6 +52,7 @@ inherited DictionaryLvDlg: TDictionaryLvDlg
         Height = 218
         Anchors = [akLeft, akTop, akRight, akBottom]
         Columns = <>
+        GridLines = True
         HideSelection = False
         ReadOnly = True
         RowSelect = True
