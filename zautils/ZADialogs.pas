@@ -2,7 +2,7 @@ unit ZADialogs;
 
 interface
 
-uses Forms, Classes, Controls, StdCtrls, ExtCtrls, ZAChkList;
+uses Forms, Classes, Controls, StdCtrls, ExtCtrls;
 
 type
   TQuarterRec = packed record
@@ -37,7 +37,7 @@ function InputQuery(const ACaption, APrompt: string; var Value: string): Boolean
 
 implementation
 
-uses Windows, Graphics, SysUtils, ZADateUtils, NumberEdit, ZAApplicationUtils;
+uses Windows, Graphics, SysUtils, NumberEdit, ZAApplicationUtils;
 
 const
   iIndent = 10;

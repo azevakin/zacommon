@@ -75,12 +75,10 @@ end;
 procedure ShowErrMsg;
 const
   PROGRAM_ALREADY_RUN = 'Приложение уже запущено';
-
 begin
-// Главное окно программы еще не существует, поэтому выводим MessageBox 
-// без владельца 
- MessageBox(0, PROGRAM_ALREADY_RUN, SemaphoreName, MB_ICONSTOP or 
-MB_OK);
+  // Главное окно программы еще не существует, поэтому выводим MessageBox 
+  // без владельца 
+  MessageBox(0, PROGRAM_ALREADY_RUN, SemaphoreName, MB_ICONSTOP or MB_OK);
 end;
 
 initialization

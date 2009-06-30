@@ -2,7 +2,7 @@ unit ZAStdCtrlsUtils;
 
 interface
 
-uses Classes, StdCtrls, ZAClasses;
+uses StdCtrls, ZAClasses;
 
 type
   TCustomEdits = array of TCustomEdit;

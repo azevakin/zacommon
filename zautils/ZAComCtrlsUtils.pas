@@ -23,7 +23,7 @@ function isSelectedAndFocused(Item: TListItem; Change: TItemChange): Boolean;
 procedure deleteChildrenAndSetHasChildren(Node: TTreeNode);
 
 // удаляет у lv переданный item и устанавливает ItemIndex
-procedure deleteListItem(lv: TListView; item: TListItem);
+procedure deleteListItem(const lv: TListView; item: TListItem=nil);
 
 // у всех листов, переданного PageControl, скрывает закладки
 procedure hideTabs(PageControl: TPageControl);
@@ -37,10 +37,38 @@ procedure deleteSelection(tv: TTreeView);
 procedure moveSelection(tv: TTreeView; dest: TTreeNode; mode: TNodeAttachMode);
 procedure incItemHeight(tv: TTreeView; const incBy: Byte);
 
+procedure UpdateLastColumnWidth(const lv: TListView);
 
 implementation
 
 uses CommCtrl, SysUtils, ZAConst;
+
+procedure UpdateLastColumnWidth(const lv: TListView);
+// Метод для задания ширины последнего столбца списка при изменении количества строк в нем.
+// Позволяет избавиться от горизонтальной полосы прокрутки (scrollbar'a ;)
+var
+  c,  // количество столбцов в списке
+  i,  // счетчик для цикла
+  w   // будующая ширина последнего столбца
+  : Integer;
+begin
+  // запомним количество столбцов
+  c := lv.Columns.Count;
+  case c of
+    // если столбцов ноль, то ничего не делаем
+    0:;
+    // если один столбец, то зададим ему ширину,
+    // равную ширине клиентской области списка
+    1: lv.Column[0].Width := lv.ClientWidth;
+  else
+    // если столбцов больше одного, то зададим последнему ширину,
+    // равную ширине клиентской области списка минус сумму ширин предыдущих столбцов
+    w := lv.ClientWidth;
+    for i := 0 to c-2 do
+      Dec(w, lv.Column[i].Width);
+    lv.Column[c-1].Width := w;
+  end;
+end;
 
 function AddTreeItem(tv: TTreeView; parent: TTreeNode; caption: string;
   data: Pointer; hasChildren: Boolean; imageIndex: Integer): TTreeNode;
@@ -78,10 +106,13 @@ begin
   end;
 end;
 
-procedure deleteListItem(lv: TListView; item: TListItem);
+procedure deleteListItem(const lv: TListView; item: TListItem=nil);
 var
   idx: Integer;
 begin
+  if not Assigned(item) then
+    item := lv.Selected;
+
   idx := item.Index;
   item.Delete;
   if idx = lv.Items.Count then
@@ -175,5 +206,3 @@ begin
 end;
 
 end.
-
-

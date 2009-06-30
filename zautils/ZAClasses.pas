@@ -2,7 +2,7 @@ unit ZAClasses;
 
 interface
 
-uses Classes, DB, ZConvert, ZPgSqlCon, ZPgSqlTr, ZPgSqlQuery;
+uses Classes, DB, ZPgSqlCon, ZPgSqlTr, ZPgSqlQuery;
 
 type
   TFilterResult = (frAll, frOne, frSome);
@@ -174,7 +174,7 @@ type
 
 implementation
 
-uses SysUtils, ZQuery, RTLConsts;
+uses SysUtils, ZQuery;
 
 { TBool }
 

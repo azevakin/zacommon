@@ -2,7 +2,7 @@ unit ZACommonUtils;
 
 interface
 
-uses Forms, Classes;
+uses Forms;
 
 function NowStr: String;
 
@@ -20,7 +20,7 @@ procedure WriteExeName(PROGRAMM_KEY: ShortString);
 
 implementation
 
-uses SysUtils, Windows, ZASysUtils, Registry, ZAConst, ZASysFolders,
+uses SysUtils, Windows, ZASysUtils, Registry, ZAConst, 
   ZAApplicationUtils;
 
 function formatError(const myMessage, eMessage: String): String;
