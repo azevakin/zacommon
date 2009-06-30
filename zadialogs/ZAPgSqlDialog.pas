@@ -12,7 +12,6 @@ type
     procedure SaveSettings;
     procedure LoadSettings;
   protected
-    procedure AlignCenter;
     procedure DoShow; override;
     procedure DoDestroy; override;
   public
@@ -56,20 +55,9 @@ begin
   Result := IsPositiveResult(ShowModal);
 end;
 
-procedure TPgSqlDlg.AlignCenter;
-begin
-  Self.Left := (Screen.Width div 2) - (Self.Width div 2);
-  Self.Top := (Screen.Height div 2) - (Self.Height div 2);
-end;
-
 procedure TPgSqlDlg.LoadSettings;
 begin
-  if RegistryKey = SNull then
-  begin
-    AlignCenter;
-    Exit;
-  end;
-
+  if RegistryKey <> SNull then
   with TRegistry.Create do
   try
     if OpenKey(RegistryKey + Self.Caption, False) then
@@ -88,9 +76,7 @@ begin
         if ValueExists(WidthValue) then
           Self.Width := ReadInteger(WidthValue);
       end;
-    end
-    else
-      AlignCenter;
+    end;
   finally
     Free;
   end;

@@ -1,6 +1,6 @@
 object PgSqlForm: TPgSqlForm
-  Left = 934
-  Top = 746
+  Left = 429
+  Top = 455
   Width = 346
   Height = 248
   Caption = 'PgSqlForm'
