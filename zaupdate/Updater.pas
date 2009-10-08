@@ -395,16 +395,20 @@ begin
 end;
 
 function TUpdater.IsNewVersion(const Major, Minor, Release, Build: Cardinal): Boolean;
-const
-  Zero = 0;
-
-var
-  i: Integer;
-
-  function ReadVersion(const Ident: string): Byte;
+  function eq(const Ident: string; const Value: Integer): Boolean;
   begin
     try
-      ReadVersion := Instructions.ReadInteger(SectionVersion, Ident, Zero);
+      Result := Instructions.ReadInteger(SectionVersion, Ident, 0) = Value;
+    except
+      on e: Exception do
+        raise Exception.Create(e.Message);
+    end;
+  end;
+
+  function gt(const Ident: string; const Value: Integer): Boolean;
+  begin
+    try
+      Result := Instructions.ReadInteger(SectionVersion, Ident, 0) > Value;
     except
       on e: Exception do
         raise Exception.Create(e.Message);
@@ -412,12 +416,10 @@ var
   end;
 
 begin
-  I := Zero;
-  I := I + Ord(ReadVersion(IdentMajor) > Major);
-  I := I + Ord(ReadVersion(IdentMinor) > Minor);
-  I := I + Ord(ReadVersion(IdentRelease) > Release);
-  I := I + Ord(ReadVersion(IdentBuild) > Build);
-  Result := I > Zero;
+  Result := gt(IdentMajor, Major) or
+    (eq(IdentMajor, Major) and gt(IdentMinor, Minor)) or
+    (eq(IdentMajor, Major) and eq(IdentMinor, Minor) and gt(IdentRelease, Release)) or
+    (eq(IdentMajor, Major) and eq(IdentMinor, Minor) and eq(IdentRelease, Release) and gt(IdentBuild, Build));
 end;
 
 procedure TUpdater.Connect;
