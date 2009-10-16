@@ -3,6 +3,7 @@ unit ZADateUtils;
 interface
 
 function CurrentMonth: Word;
+function IsDate(const value: string): Boolean;
 function MonthOf(const ADate: TDateTime): Word;
 function QuarterOf(const ADate: TDateTime): Word;
 function YearOf(const ADate: TDateTime): Word;
@@ -17,6 +18,16 @@ var
 begin
   GetLocalTime(SystemTime);
   Result := SystemTime.wMonth;
+end;
+
+function IsDate(const value: string): Boolean;
+begin
+  Result := False;
+  try
+    StrToDate(value);
+    Result := True;
+  except
+  end;
 end;
 
 function MonthOf(const ADate: TDateTime): Word;
