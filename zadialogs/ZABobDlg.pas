@@ -22,7 +22,8 @@ type
     property Text: String read GetText write SetText;
     property Padding: Integer read FPadding write SetPadding default 10;
     procedure HideBob;
-    procedure ShowMessage(const AText: String);
+    procedure ShowMessage(const AText: String); overload;
+    procedure ShowMessage(const AText: String; const Seconds: Byte); overload;
     procedure ShowMessageFmt(const fmt: string; const args: array of const);
   end;
 
@@ -111,6 +112,15 @@ procedure TBobDlg.ShowMessage(const AText: String);
 begin
   Text := AText;
   Show;
+  Application.ProcessMessages;
+end;
+
+procedure TBobDlg.ShowMessage(const AText: String; const Seconds: Byte);
+begin
+  Text := AText;
+  Show;
+  Application.ProcessMessages;
+  Sleep(Seconds * 1000);
   Application.ProcessMessages;
 end;
 
