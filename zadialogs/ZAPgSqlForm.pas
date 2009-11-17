@@ -41,13 +41,14 @@ type
   private
     FTransaction: TZPgSqlTransact;
     FRegistryKey: string;
+    FIniFilename: string;
     procedure SetTransaction(const Value: TZPgSqlTransact);
     procedure SetRegistryKey(const Value: string);
   public
     constructor Create(AOwner: TComponent; ATransaction: TZPgSqlTransact); reintroduce; virtual;
 
+    function IniFilename: string;
     function LoadOptions(const withLogin: Boolean): Boolean;
-
     procedure SaveLogin;
     procedure SaveOptions;
 
@@ -60,10 +61,12 @@ type
 
 implementation
 
-uses ZQuery, ZAConst, Registry, Controls;
+uses ZQuery, ZAConst, Registry, Controls, IniFiles;
 
 {$R *.dfm}
 
+const
+  sec_connection = 'Connection';
 
 function ConnectOptionsKey(const ApplicationKey: string; const NewStyle: Boolean=False): string;
 const
@@ -180,6 +183,14 @@ end;
 
 { TConnectOptions }
 
+function TConnectOptions.IniFilename: string;
+begin
+  if FIniFilename = '' then
+    Self.FIniFilename := ChangeFileExt(ParamStr(0), '.ini');
+
+  Result := Self.FIniFilename;
+end;
+
 constructor TConnectOptions.Create(AOwner: TComponent;
   ATransaction: TZPgSqlTransact);
 begin
@@ -195,49 +206,86 @@ var
 begin
   Count := Zero;
   if Assigned(FTransaction) and (FRegistryKey <> SNull) then
-    with TRegistry.Create do
-    try
-      if OpenKey(FRegistryKey, False) then
+  with TRegistry.Create do
+  try
+    if OpenKey(FRegistryKey, False) then
+    begin
+      if ValueExists(SHost) then
       begin
-        if ValueExists(SHost) then
-        begin
-          Inc(Count);
-          FTransaction.Database.Host := ReadString(SHost);
-        end;
-
-        if ValueExists(SDataBase) then
-        begin
-          Inc(Count);
-          FTransaction.Database.Database := ReadString(SDataBase);
-        end;
-
-        if ValueExists(SPort) then
-          FTransaction.Database.Port := ReadString(SPort);
-
-        if withLogin and ValueExists(SLogin) then
-          FTransaction.Database.Login := ReadString(SLogin);
+        Inc(Count);
+        FTransaction.Database.Host := ReadString(SHost);
       end;
+
+      if ValueExists(SDataBase) then
+      begin
+        Inc(Count);
+        FTransaction.Database.Database := ReadString(SDataBase);
+      end;
+
+      if ValueExists(SPort) then
+        FTransaction.Database.Port := ReadString(SPort);
+
+      if withLogin and ValueExists(SLogin) then
+        FTransaction.Database.Login := ReadString(SLogin);
+    end;
+  finally
+    Free;
+  end
+  else
+  begin
+    if FileExists(IniFilename) then
+    with TIniFile.Create(IniFilename) do
+    try
+      if ValueExists(sec_connection, SHost) then
+      begin
+        Inc(Count);
+        FTransaction.Database.Host := ReadString(sec_connection, SHost, '');
+      end;
+
+      if ValueExists(sec_connection, SDataBase) then
+      begin
+        Inc(Count);
+        FTransaction.Database.Database := ReadString(sec_connection, SDataBase, '');
+      end;
+
+      if ValueExists(sec_connection, SPort) then
+        FTransaction.Database.Port := ReadString(sec_connection, SPort, '');
+
+      if withLogin and ValueExists(sec_connection, SLogin) then
+        FTransaction.Database.Login := ReadString(sec_connection, SLogin, '');
     finally
       Free;
     end;
+  end;
   Result := ArrayOfResults[Count];
 end;
 
 procedure TConnectOptions.SaveLogin;
 begin
   if Assigned(FTransaction) and (FRegistryKey <> SNull) then
-    with TRegistry.Create do
+  with TRegistry.Create do
+  try
+    if OpenKey(FRegistryKey, True) then
+      WriteString(SLogin, FTransaction.Database.Login);
+  finally
+    Free;
+  end
+  else
+  begin
+    with TIniFile.Create(IniFilename) do
     try
-      if OpenKey(FRegistryKey, True) then
-        WriteString(SLogin, FTransaction.Database.Login);
+      WriteString(sec_connection, SLogin, FTransaction.Database.Login);
     finally
       Free;
     end;
+  end;
 end;
 
 procedure TConnectOptions.SaveOptions;
 begin
-  if Assigned(FTransaction) and (FRegistryKey <> SNull) then
+  if Assigned(FTransaction) then
+  begin
+    if (FRegistryKey <> SNull) then
     with TRegistry.Create do
     try
       if OpenKey(FRegistryKey, True) then
@@ -248,7 +296,19 @@ begin
       end;
     finally
       Free;
+    end
+    else
+    begin
+      with TIniFile.Create(IniFilename) do
+      try
+        WriteString(sec_connection, SHost, FTransaction.Database.Host);
+        WriteString(sec_connection, SDataBase, FTransaction.Database.Database);
+        WriteString(sec_connection, SPort, FTransaction.Database.Port);
+      finally
+        Free;
+      end;
     end;
+  end;
 end;
 
 procedure TConnectOptions.SetRegistryKey(const Value: string);
