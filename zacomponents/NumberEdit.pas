@@ -35,6 +35,8 @@ type
   public
     constructor Create(AOwner: TComponent); override;
   published
+    function DecimalValue: Single;
+    function IntegerValue: Integer;
     property AllowDecimal: Boolean read FAllowDecimal write SetAllowDecimal default False;
     property AllowNegative: Boolean read FAllowNegative write SetAllowNegative default False;
     property Anchors;
@@ -198,6 +200,16 @@ begin
   inherited Create(AOwner);
 //  AutoSelect   := False; без него не так удобно
   ControlStyle := ControlStyle - [csSetCaption];
+end;
+
+function TNumberEdit.DecimalValue: Single;
+begin
+  Result := StrToFloat(Text);
+end;
+
+function TNumberEdit.IntegerValue: Integer;
+begin
+  Result := StrToInt(Text);
 end;
 
 end.
