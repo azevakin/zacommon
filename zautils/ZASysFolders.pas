@@ -7,6 +7,7 @@ function GetSystemDrive: string;
 function GetTempPath: string;
 function GetUserAppDataDir: string;
 function GetUserDesktopDir: string;
+function GetUserDocumentsDir: string;
 function GetWindowsDir: string;
 
 implementation
@@ -17,8 +18,8 @@ const
   RK_ShellFolders = 'Software\Microsoft\Windows\CurrentVersion\Explorer\Shell Folders\';
 
   VAppData = 'AppData';
-// .....
   VDesktop = 'Desktop';
+  VDocuments = 'Personal';
 
   Slash = '\';
 
@@ -99,6 +100,19 @@ begin
   try
     OpenKey(RK_ShellFolders, False);
     Result := ReadString(VDesktop);
+    ChkDir(Result);
+  finally
+    Free;
+  end;
+end;
+
+function GetUserDocumentsDir: string;
+begin
+  Result := SNull;
+  with TRegistry.Create do
+  try
+    OpenKey(RK_ShellFolders, False);
+    Result := ReadString(VDocuments);
     ChkDir(Result);
   finally
     Free;
