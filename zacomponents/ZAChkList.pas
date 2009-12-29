@@ -60,6 +60,7 @@ type
     procedure CreateWnd; override;
     procedure DestroyWnd; override;
     function GetCheckWidth: Integer;
+    function GetCheckedList: TStrings;
   public
     constructor Create(AOwner: TComponent); override;
     destructor Destroy; override;
@@ -71,6 +72,14 @@ type
     property Header[Index: Integer]: Boolean read GetHeader write SetHeader;
     procedure CheckAll;
     procedure UnCheckAll;
+
+    function Values: string; overload;
+    function Values(const quote_format: string): string; overload;
+    function Value: string;
+    function IDs: string;
+    function ID: Integer;
+
+    property CheckedList: TStrings read GetCheckedList;
   published
     property OnClickCheck: TNotifyEvent read FOnClickCheck write FOnClickCheck;
     property Align;
@@ -140,15 +149,19 @@ type
     property OnStartDrag;
   end;
 
-function GetValues(lb: TZAChkListBox): string;
-function GetValue(lb: TZAChkListBox): string;
-function GetIDs(lb: TZAChkListBox): string;
-function GetID(lb: TZAChkListBox): Integer;
+function GetValues(lb: TZAChkListBox): string; // лучше использовать lb.Values
+function GetValue(lb: TZAChkListBox): string; // лучше использовать lb.Value
+function GetIDs(lb: TZAChkListBox): string; // лучше использовать lb.IDs
+function GetID(lb: TZAChkListBox): Integer; // лучше использовать lb.ID
 procedure Register;
 
 implementation
 
 uses Consts, RTLConsts, Themes, ZAConst, ZAClasses;
+
+const
+  e_check_one_or_more = 'Не выбран ни один элемент списка!';
+
 
 function GetID(lb: TZAChkListBox): Integer;
 var
@@ -777,7 +790,60 @@ begin
     Checked[I] := False;
 end;
 
+function TZAChkListBox.ID: Integer;
+var
+  lst: TStrings;
+begin
+  lst := Self.CheckedList;
+  if lst.Count = 0 then
+    raise Exception.Create(e_check_one_or_more)
+  else
+    Result := TID(lst.Objects[0]).Id;
+end;
+
+function TZAChkListBox.IDs: string;
+begin
+  Result := GetIDs(Self);
+end;
+
+function TZAChkListBox.Value: string;
+var
+  lst: TStrings;
+begin
+  lst := Self.CheckedList;
+  if lst.Count = 0 then
+    raise Exception.Create(e_check_one_or_more)
+  else
+    Result := lst.Strings[0];
+end;
+
+function TZAChkListBox.Values: string;
+begin
+  Result := CheckedList.CommaText;
+end;
+
+function TZAChkListBox.Values(const quote_format: string): string;
+var
+  i: Integer;
+  lst: TStrings;
+begin
+  Result := '';
+  lst := Self.CheckedList;
+  for i := 0 to lst.Count-1 do
+    Result := Result + Format(quote_format, [lst.Strings[i]]) + ',';
+  Delete(Result, Length(Result), 1);
+end;
+
+function TZAChkListBox.GetCheckedList: TStrings;
+var
+  i: Integer;
+begin
+  Result := TStringList.Create;
+  for i := 0 to Self.Count-1 do
+    if Self.Checked[i] then
+      Result.AddObject(Self.Items[i], Self.Items.Objects[i]);
+end;
+
 initialization
   GetCheckSize;
-
 end.
