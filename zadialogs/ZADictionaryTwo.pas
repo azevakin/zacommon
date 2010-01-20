@@ -92,7 +92,7 @@ type
 implementation
 
 uses inputValues, ZAClasses, ZAApplicationUtils, ZAConst,
-  SysUtils, Windows;
+  SysUtils, Windows, ZABobDlg;
 
 {$R *.dfm}
 
@@ -179,24 +179,27 @@ end;
 procedure TDictionaryTwoDlg.LoadValues;
 begin
   inherited;
-  with openQuery(SqlForSelect) do
+  with showBobDlg do
   try
-    lvValues.Items.BeginUpdate;
-    while not Eof do
-      with lvValues.Items.Add do
-      begin
-        Application.ProcessMessages;
-        Data := TID.Create(Fields[0].AsInteger);
-        Caption := Fields[1].AsString;
-        SubItems.Add(Fields[2].AsString);
-        Next;
-      end;
+    with openQuery(SqlForSelect) do
+    try
+      lvValues.Items.BeginUpdate;
+      while not Eof do
+        with lvValues.Items.Add do
+        begin
+          Application.ProcessMessages;
+          Data := TID.Create(Fields[0].AsInteger);
+          Caption := Fields[1].AsString;
+          SubItems.Add(Fields[2].AsString);
+          Next;
+        end;
+    finally
+      lvValues.Items.EndUpdate;
+      UpdateRecordCount;
+      UpdateLastColumnWidth;
+      Free;
+    end;
   finally
-    lvValues.Items.EndUpdate;
-    lvValues.Columns[1].Width := lvValues.ClientWidth
-                               - lvValues.Columns[0].Width
-                               - GetSystemMetrics(SM_CXVSCROLL);
-    UpdateRecordCount;
     Free;
   end;
 end;
@@ -204,7 +207,8 @@ end;
 procedure TDictionaryTwoDlg.lvValuesDeletion(Sender: TObject;
   Item: TListItem);
 begin
-  if Assigned(Item) then
+  inherited;
+  if Assigned(Item.Data) then
   begin
     TID(Item.Data).Free;
     Item.Data := nil;

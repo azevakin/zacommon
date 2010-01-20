@@ -23,6 +23,7 @@ type
     pnlOther: TPanel;
     pnlDelete: TPanel;
   private
+    FAfterLoad: TNotifyEvent;
     function GetAllowAdd: Boolean;
     function GetAllowDelete: Boolean;
     function GetAllowEdit: Boolean;
@@ -68,6 +69,8 @@ type
     ///////////////////////////////////////////////////////////////////////////
     //  Задает видимость кнопки "Выбрать".
     ///////////////////////////////////////////////////////////////////////////
+
+    property AfterLoad: TNotifyEvent read FAfterLoad write FAfterLoad;
   end;
 
 
@@ -121,6 +124,8 @@ procedure TCustomDictionaryDlg.DoShow;
 begin
   inherited;
   LoadValues;
+  if Assigned(FAfterLoad) then
+    FAfterLoad(Self);
 end;
 
 procedure TCustomDictionaryDlg.LoadValues;

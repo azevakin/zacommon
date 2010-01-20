@@ -41,7 +41,6 @@ inherited DictionaryTwoDlg: TDictionaryTwoDlg
             Caption = #1057#1086#1082#1088#1072#1097#1077#1085#1080#1077
             MinWidth = 80
           end>
-        OnDeletion = lvValuesDeletion
       end
     end
   end

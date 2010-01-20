@@ -41,6 +41,7 @@ inherited DictionaryLvDlg: TDictionaryLvDlg
         Anchors = [akLeft, akTop, akRight]
         TabOrder = 0
         OnChange = edtSearchChange
+        OnKeyDown = edtSearchKeyDown
       end
     end
   end

@@ -40,6 +40,7 @@ inherited CustomDictionaryLvDlg: TCustomDictionaryLvDlg
         ViewStyle = vsReport
         OnChange = lvValuesChange
         OnDblClick = lvValuesDblClick
+        OnDeletion = lvValuesDeletion
         OnMouseDown = lvValuesMouseDown
       end
     end

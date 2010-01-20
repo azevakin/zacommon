@@ -15,6 +15,7 @@ type
     procedure lvValuesDblClick(Sender: TObject);
     procedure lvValuesChange(Sender: TObject; Item: TListItem;
       Change: TItemChange);
+    procedure lvValuesDeletion(Sender: TObject; Item: TListItem);
   protected
     procedure UpdateLastColumnWidth;
     procedure UpdateRecordCount; override;
@@ -66,6 +67,13 @@ begin
   end
   else
     SetButtonsEnabled(False);
+end;
+
+procedure TCustomDictionaryLvDlg.lvValuesDeletion(Sender: TObject;
+  Item: TListItem);
+begin
+  inherited;
+  Application.ProcessMessages;
 end;
 
 end.
