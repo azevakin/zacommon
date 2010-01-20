@@ -37,15 +37,22 @@ procedure deleteSelection(tv: TTreeView);
 procedure moveSelection(tv: TTreeView; dest: TTreeNode; mode: TNodeAttachMode);
 procedure incItemHeight(tv: TTreeView; const incBy: Byte);
 
+// Метод для задания ширины последнего столбца списка при изменении количества строк в нем.
+// Позволяет избавиться от горизонтальной полосы прокрутки (scrollbar'a ;)
 procedure UpdateLastColumnWidth(const lv: TListView);
+
+function searchByID(const lv: TListView; const subitem, id: Integer): TListItem;
+// Ищет в lv элемент с кодом равным id
+// subitem - флаг определяющий с чем id
+//  -2 - item.data
+//  -1 - item.caption
+//  остальные - item.Subitems[subitem]
 
 implementation
 
-uses CommCtrl, SysUtils, ZAConst;
+uses CommCtrl, SysUtils, ZAConst, ZAClasses;
 
 procedure UpdateLastColumnWidth(const lv: TListView);
-// Метод для задания ширины последнего столбца списка при изменении количества строк в нем.
-// Позволяет избавиться от горизонтальной полосы прокрутки (scrollbar'a ;)
 var
   c,  // количество столбцов в списке
   i,  // счетчик для цикла
@@ -140,6 +147,50 @@ begin
     lvItem.MakeVisible(True);
     lvItem.Selected := True;
     lvItem.Focused := True;
+  end;
+end;
+
+function searchByID(const lv: TListView; const subitem, id: Integer): TListItem;
+// Ищет в lv элемент с кодом равным id
+// subitem - флаг определяющий с чем id
+//  -2 - item.data
+//  -1 - item.caption
+//  остальные - item.Subitems[subitem]
+var
+  i: Integer;
+begin
+  Result := nil;
+  case subitem of
+    -2:
+      for i := 0 to lv.Items.Count-1 do
+        if TID(lv.Items[i].Data).Id = id then
+        begin
+          Result := lv.Items[i];
+          Break;
+        end;
+
+    -1:
+      for i := 0 to lv.Items.Count-1 do
+        if StrToInt(lv.Items[i].Caption) = id then
+        begin
+          Result := lv.Items[i];
+          Break;
+        end;
+
+  else
+      for i := 0 to lv.Items.Count-1 do
+        if StrToInt(lv.Items[i].SubItems[subitem]) = id then
+        begin
+          Result := lv.Items[i];
+          Break;
+        end;
+  end;
+
+  if Result <> nil then
+  begin
+    Result.MakeVisible(True);
+    Result.Selected := True;
+    Result.Focused := True;
   end;
 end;
 
