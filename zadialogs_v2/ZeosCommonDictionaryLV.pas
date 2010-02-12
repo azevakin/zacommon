@@ -3,8 +3,8 @@ unit ZeosCommonDictionaryLV;
 interface
 
 uses
-  Classes, Controls, Forms, ZeosCommonDictionary, ComCtrls, StdCtrls,
-  ExtCtrls;
+  Classes, Controls, Forms, ZeosCommonDictionary, ComCtrls, 
+  ExtCtrls, StdCtrls;
 
 type
   TZeosCommonDictionaryLVDlg = class(TZeosCommonDictionaryDlg)

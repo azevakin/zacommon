@@ -56,7 +56,7 @@ end;
 
 procedure TZeosCommonDlg.LoadSettings;
 begin
-  if FileExists(IniFilename) then
+  if FileExists(IniFilename) and (Self.Caption <> '') then
   with TIniFile.Create(IniFilename) do
   try
     if ValueExists(Self.Caption, LeftValue) then
@@ -80,6 +80,7 @@ end;
 
 procedure TZeosCommonDlg.SaveSettings;
 begin
+  if Self.Caption <> '' then
   with TIniFile.Create(IniFilename) do
   try
     WriteInteger(Self.Caption, LeftValue, Self.Left);

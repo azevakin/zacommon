@@ -42,6 +42,7 @@ object ProgressDlg: TProgressDlg
       Top = 35
       Width = 311
       Height = 16
+      Max = 0
       TabOrder = 0
     end
     object btnCancel: TButton

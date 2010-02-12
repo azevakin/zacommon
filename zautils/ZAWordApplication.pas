@@ -5,21 +5,12 @@ interface
 uses
   SysUtils,
   Variants,
-//  Word97,
-//  Word2000,
-//  WordXp,
   ComObj,
   Classes;
 
 type
-//  TZAConnectKind  = (ckRunningOrNew,          // Attach to a running or create a new instance of the server
-//                     ckNewInstance);          // Create a new instance of the server
-
-//  TZAParagraphFormat = class()
-
   TZAWordApplication = class(TComponent)
   private
-//    FConnectKind: TZAConnectKind;
     FVisible: Boolean;
     FWordApplication: OleVariant;
     function GetConnected: Boolean;
@@ -27,8 +18,8 @@ type
     function GetVisible: Boolean;
     procedure SetVisible(const Value: Boolean);
     function GetSelection: OleVariant;
-//    function GetParagraphFormat: OleVariant;
-//    procedure SetParagraphFormat(const Value: OleVariant);
+    function GetActiveDocument: OleVariant;
+    procedure SetSelection(const Value: OleVariant);
   protected
   public
     constructor Create(AOwner: TComponent); override;
@@ -36,10 +27,9 @@ type
     function CentimetersToPoints(Centimeters: Single): Single;
     procedure Show;
   published
+    property ActiveDocument: OleVariant read GetActiveDocument;
     property Connected: Boolean read GetConnected write SetConnected;
-//    property ConnectKind: TZAConnectKind read FConnectKind write FConnectKind default ckRunningOrNew;
-    property Selection: OleVariant read GetSelection;
-//    property ParagraphFormat: OleVariant read GetParagraphFormat write SetParagraphFormat;
+    property Selection: OleVariant read GetSelection write SetSelection;
     property Visible: Boolean read GetVisible write SetVisible default False;
     property WordApplication: OleVariant read FWordApplication;
     procedure Activate;
@@ -108,10 +98,6 @@ begin
     FWordApplication := CreateOleObject(SWordApplication);
     if VarIsEmpty(FWordApplication) then
       raise Exception.CreateFmt('Не могу создать объект ''%s''', [SWordApplication]);
-//        begin
-//          FWordApplication := GetActiveOleObject(SWordApplication);
-//          if VarIsEmpty(FWordApplication) then
-//            FWordApplication := CreateOleObject(SWordApplication);
   end else
     FWordApplication := Unassigned;
 end;
@@ -128,7 +114,8 @@ end;
 
 function TZAWordApplication.GetSelection: OleVariant;
 begin
-  if not Connected then raise Exception.Create('Нет активного документа');
+  if not Connected then
+    raise Exception.Create('Нет активного документа');
   Result := FWordApplication.Selection;
 end;
 
@@ -153,41 +140,7 @@ begin
   if Paragraph then
     Self.Selection.TypeParagraph;
 end;
-(*
-function TZAWordApplication.GetParagraphFormat: OleVariant;
-begin
-  Self.Selection.ParagraphFormat;
-end;
 
-procedure TZAWordApplication.SetParagraphFormat(const Value: OleVariant);
-begin
-{
-  With Selection.ParagraphFormat
-    .LeftIndent = CentimetersToPoints(0)
-    .RightIndent = CentimetersToPoints(0)
-    .SpaceBefore = 0
-    .SpaceBeforeAuto = False
-    .SpaceAfter = 0
-    .SpaceAfterAuto = False
-    .LineSpacingRule = wdLineSpaceSingle
-    .Alignment = wdAlignParagraphLeft
-    .WidowControl = True
-    .KeepWithNext = False
-    .KeepTogether = False
-    .PageBreakBefore = False
-    .NoLineNumber = False
-    .Hyphenation = True
-    .FirstLineIndent = CentimetersToPoints(0)
-    .OutlineLevel = wdOutlineLevelBodyText
-    .CharacterUnitLeftIndent = 0
-    .CharacterUnitRightIndent = 0
-    .CharacterUnitFirstLineIndent = 0
-    .LineUnitBefore = 0
-    .LineUnitAfter = 0
-  End With
-}
-end;
-*)
 procedure TZAWordApplication.Show;
 begin
   Visible := True;
@@ -197,6 +150,22 @@ end;
 function TZAWordApplication.CentimetersToPoints(Centimeters: Single): Single;
 begin
   Result := Centimeters * 28.35;
+end;
+
+function TZAWordApplication.GetActiveDocument: OleVariant;
+begin
+  if not Connected then
+    raise Exception.Create('Нет активного документа');
+  Result := FWordApplication.ActiveDocument;
+end;
+
+procedure TZAWordApplication.SetSelection(const Value: OleVariant);
+begin
+  if not Connected then
+    raise Exception.Create('Нет активного документа');
+
+  if FWordApplication.Selection <> Value then
+    FWordApplication.Selection := Value;
 end;
 
 end.

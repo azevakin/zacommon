@@ -3,8 +3,8 @@ unit ZeosCommonForm;
 interface
 
 uses
-  Classes, Forms, DB, SysUtils, ZConnection, ZSqlUpdate,
-  ZAbstractRODataset, ZAbstractDataset, ZDataset;
+  Classes, Forms, DB, SysUtils, ZConnection, 
+  ZAbstractRODataset, ZAbstractDataset, ZDataset, ZDbcIntfs;
 
 type
   TParams = DB.TParams;
@@ -14,6 +14,8 @@ type
   TZConnection = ZConnection.TZConnection;
 
   TZQuery = ZDataset.TZQuery;
+
+  TZTransactIsolationLevel = ZDbcIntfs.TZTransactIsolationLevel;
 
   TZeosCommonFrm = class(TForm)
   private
@@ -26,9 +28,10 @@ type
     function OpenQuery(const SQL: string; const Args: array of const): TZQuery; overload;
     function OpenQuery(const SQL: string): TZQuery; overload;
   public
-    property Connection: TZConnection read FConnection write SetConnection;
     constructor Create(AOwner: TComponent; AConnection: TZConnection); reintroduce; virtual;
     function GetConnectOptions: string;
+    procedure CheckUniqueConstraint(const e: Exception);
+    property Connection: TZConnection read FConnection write SetConnection;
   end;
 
 
@@ -62,7 +65,7 @@ const
   duplicate_unique_constraint = 'ОШИБКА: Попытка ввода дубликата.'#13'Запись с данными параметрами уже существует.';
 
 
-  function EHasText(e: Exception; const text: string): Boolean;
+function EHasText(e: Exception; const text: string): Boolean;
 begin
   Result := Pos(AnsiLowerCase(text), AnsiLowerCase(e.Message)) > 0;
 end;
@@ -105,23 +108,14 @@ begin
     Screen.Cursor := crHourGlass;
     try
       Application.ProcessMessages;
-//      Result.Connection.StartTransaction;
-      Application.ProcessMessages;
       Result.ExecSql;
-      Application.ProcessMessages;
-//      Connection.Commit;
     finally
+      Application.ProcessMessages;
       Screen.Cursor := crDefault;
     end;
   except
     on e: Exception do
-    begin
-//      Result.Connection.Rollback;
-      if Pos(e_duplicate_unique_constraint, e.Message) > 0 then
-        raise Exception.Create(duplicate_unique_constraint)
-      else
-        raise Exception.Create(e.Message);
-    end;
+      CheckUniqueConstraint(e);
   end;
 end;
 
@@ -138,28 +132,28 @@ begin
     Screen.Cursor := crHourGlass;
     try
       Application.ProcessMessages;
-//      Result.Connection.StartTransaction;
-      Application.ProcessMessages;
       Result.Open;
-      Application.ProcessMessages;
     finally
+      Application.ProcessMessages;
       Screen.Cursor := crDefault;
     end;
   except
     on e: Exception do
-    begin
-//      Result.Connection.Rollback;
-      if Pos(e_duplicate_unique_constraint, e.Message) > 0 then
-        raise Exception.Create(duplicate_unique_constraint)
-      else
-        raise Exception.Create(e.Message);
-    end;
+      CheckUniqueConstraint(e);
   end;
 end;
 
 function TZeosCommonFrm.OpenQuery(const SQL: string): TZQuery;
 begin
   Result := OpenQuery(SQL, []);
+end;
+
+procedure TZeosCommonFrm.CheckUniqueConstraint(const e: Exception);
+begin
+  if Pos(e_duplicate_unique_constraint, e.Message) > 0 then
+    raise Exception.Create(duplicate_unique_constraint)
+  else
+    raise Exception.Create(e.Message);
 end;
 
 { TConnectOptions }
