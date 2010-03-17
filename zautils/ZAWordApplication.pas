@@ -20,33 +20,42 @@ type
     function GetSelection: OleVariant;
     function GetActiveDocument: OleVariant;
     procedure SetSelection(const Value: OleVariant);
+    function GetDocuments: OleVariant;
+    procedure CheckConnected;
+    function GetApplication: OleVariant;
   protected
   public
     constructor Create(AOwner: TComponent); override;
     destructor Destroy; override;
-    function CentimetersToPoints(Centimeters: Single): Single;
-    procedure Show;
+    class function CentimetersToPoints(Centimeters: Single): Single;
+    class function MillimetersToPoints(Millimeters: Single): Single;
   published
-    property ActiveDocument: OleVariant read GetActiveDocument;
-    property Connected: Boolean read GetConnected write SetConnected;
-    property Selection: OleVariant read GetSelection write SetSelection;
-    property Visible: Boolean read GetVisible write SetVisible default False;
-    property WordApplication: OleVariant read FWordApplication;
     procedure Activate;
     procedure Connect;
+    procedure Close;
     procedure Disconnect;
     procedure GoToBookmark(const Name: String);
     procedure InsertAfter(const S: String);
     procedure InsertBefore(const S: String);
+    procedure Show;
     procedure TypeText(const S: String; const Paragraph: Boolean = False);
+    property ActiveDocument: OleVariant read GetActiveDocument;
+    property Application: OleVariant read GetApplication;
+    property Connected: Boolean read GetConnected write SetConnected;
+    property Documents: OleVariant read GetDocuments;
+    property Selection: OleVariant read GetSelection write SetSelection;
+    property Visible: Boolean read GetVisible write SetVisible default False;
+    property WordApplication: OleVariant read FWordApplication;
   end;
 
-const
-  wdAutoFitFixed = $00000000;
-  wdAutoFitContent = $00000001;
-  wdAutoFitWindow = $00000002;
-
+//const
+//  wdAutoFitFixed = $00000000;
+//  wdAutoFitContent = $00000001;
+//  wdAutoFitWindow = $00000002;
+                                 
 implementation
+
+uses WordConst;
 
 const
   SWordApplication = 'Word.Application';
@@ -112,10 +121,15 @@ begin
   Connected := False;
 end;
 
-function TZAWordApplication.GetSelection: OleVariant;
+procedure TZAWordApplication.CheckConnected;
 begin
   if not Connected then
     raise Exception.Create('Нет активного документа');
+end;
+
+function TZAWordApplication.GetSelection: OleVariant;
+begin
+  CheckConnected;
   Result := FWordApplication.Selection;
 end;
 
@@ -147,25 +161,44 @@ begin
   Activate;
 end;
 
-function TZAWordApplication.CentimetersToPoints(Centimeters: Single): Single;
+class function TZAWordApplication.CentimetersToPoints(Centimeters: Single): Single;
 begin
   Result := Centimeters * 28.35;
 end;
 
+class function TZAWordApplication.MillimetersToPoints(Millimeters: Single): Single;
+begin
+  Result := Millimeters * 2.85;
+end;
+
 function TZAWordApplication.GetActiveDocument: OleVariant;
 begin
-  if not Connected then
-    raise Exception.Create('Нет активного документа');
+  CheckConnected;
   Result := FWordApplication.ActiveDocument;
 end;
 
 procedure TZAWordApplication.SetSelection(const Value: OleVariant);
 begin
-  if not Connected then
-    raise Exception.Create('Нет активного документа');
-
+  CheckConnected;
   if FWordApplication.Selection <> Value then
     FWordApplication.Selection := Value;
+end;
+
+function TZAWordApplication.GetDocuments: OleVariant;
+begin
+  CheckConnected;
+  Result := FWordApplication.Documents;
+end;
+
+function TZAWordApplication.GetApplication: OleVariant;
+begin
+  CheckConnected;
+  Result := FWordApplication.Application;
+end;
+
+procedure TZAWordApplication.Close;
+begin
+  Application.Quit(wdDoNotSaveChanges);
 end;
 
 end.
