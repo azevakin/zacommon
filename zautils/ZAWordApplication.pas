@@ -48,11 +48,6 @@ type
     property WordApplication: OleVariant read FWordApplication;
   end;
 
-//const
-//  wdAutoFitFixed = $00000000;
-//  wdAutoFitContent = $00000001;
-//  wdAutoFitWindow = $00000002;
-                                 
 implementation
 
 uses WordConst;

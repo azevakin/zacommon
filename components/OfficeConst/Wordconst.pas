@@ -233,6 +233,9 @@ const
   wdAutoClose = 3 ;
   wdAutoExec = 0 ;
   wdAutoExit = 4 ;
+  wdAutoFitFixed = 0 ;
+  wdAutoFitContent = 1 ;
+  wdAutoFitWindow = 2 ;
   wdAutomaticUpdate = 3 ;
   wdAutoNew = 1 ;
   wdAutoOpen = 2 ;
@@ -1949,6 +1952,7 @@ const
   wdWithInTable = 12 ;
   wdWord = 2 ;
   wdWordDocument = 0 ;
+  wdWord9TableBehavior = 1 ;
   wdWorkgroupTemplatesPath = 3 ;
   wdWPJustification = 31 ;
   wdWPSpaceWidth = 30 ;
