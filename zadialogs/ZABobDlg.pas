@@ -27,7 +27,10 @@ type
     procedure ShowMessageFmt(const fmt: string; const args: array of const);
   end;
 
-  function showBobDlg(const text: string = 'Пожалуйста подождите...'): TBobDlg;
+const
+  PLEASE_WAIT = 'Пожалуйста подождите...';
+  
+  function showBobDlg(const text: string = PLEASE_WAIT): TBobDlg;
 
 implementation
 
