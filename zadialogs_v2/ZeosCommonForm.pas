@@ -219,6 +219,7 @@ begin
     WriteString(sec_connection, SProtocol, Connection.Protocol);
     WriteString(sec_connection, SHostName, Connection.HostName);
     WriteString(sec_connection, SDataBase, Connection.Database);
+    WriteInteger(sec_connection, SPort, Connection.Port);
     WriteString(sec_connection, SUser, Connection.User);
   finally
     Free;
