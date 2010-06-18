@@ -23,7 +23,7 @@ begin
     ftDate,
     ftTime,
     ftDateTime:
-      Result := '''' + Field.AsString;
+      Result := Field.AsString;
 
     ftSmallint,
     ftInteger,
