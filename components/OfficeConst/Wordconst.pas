@@ -1974,6 +1974,8 @@ const
   wdYellow = 7 ;
   wdZoomPercentage = 19 ;
   wdZulu = 1077 ;
+
+  wdPreferredWidthPoints = 3;
 implementation
 end.
 
