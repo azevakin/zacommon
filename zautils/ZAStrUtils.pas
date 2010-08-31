@@ -5,6 +5,7 @@ interface
 type
   TFullName = (fnFullName, fnFirstInitials, fnLastInitials);
 
+  function FirstLower(S: String): String;
   function FirstUpper(S: String): String;
   function FormatFIO(const fam, nam, ot: String; const Convert: TFullName): string;
   function RStr(const S: String; Count: Integer): String;
@@ -14,6 +15,13 @@ type
 implementation
 
 uses Windows, ZAConst;
+
+function FirstLower(S: String): String;
+begin
+  Result := S;
+  if Length(Result) > 0 then
+    CharLowerBuff(@Result[1], 1);
+end;
 
 function FirstUpper(S: String): String;
 begin

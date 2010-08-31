@@ -2,11 +2,6 @@ unit ZADeclension;
 
 interface
 
-const
-  { Пол }
-  male = True;
-  female = False;
-
 type
   { Падеж }
   TPadeg = 1..6;
@@ -20,17 +15,6 @@ type
   ///////////////////////////////////////////////////////////
 
   TMonth = 1..12;
-
-  function DeclensionDate(ADate: TDateTime; Padeg: TPadeg): String;
-  function DeclensionEducationForm(const EducationForm: String): String;
-
-  function StudentStr(const padeg: TPadeg; const sex: Boolean): String;
-
-  function DeclensionInstitute(const S: String): String;
-
-implementation
-
-uses SysUtils, ZAConst, ZAStrUtils;
 
 const
   DeclensionMons: array[TMonth, TPadeg] of String = (
@@ -51,6 +35,21 @@ const
   DeclensionYear: array[TPadeg] of String = (
     'год', 'года', 'году', 'год', 'годом', 'годе'
   );
+
+  { Пол }
+  male = True;
+  female = False;
+
+  function DeclensionDate(ADate: TDateTime; Padeg: TPadeg): String;
+  function DeclensionEducationForm(const EducationForm: String): String;
+
+  function StudentStr(const padeg: TPadeg; const sex: Boolean): String;
+
+  function DeclensionInstitute(const S: String): String;
+
+implementation
+
+uses SysUtils, ZAConst, ZAStrUtils;
 
 function DeclensionDate(ADate: TDateTime; Padeg: TPadeg): String;
 var
