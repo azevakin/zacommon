@@ -1,0 +1,32 @@
+Docs
+  Этот файл
+  Licence.txt            3723  02.03.06  09:00
+  Padeg.als             29105  24.01.06  13:47
+  Price.txt               807  02.03.06  10:00
+  Readme.doc           310784  04.09.08  10:03
+
+Library
+  Except.dic             4804  04.09.08  10:36
+  Padeg.dll            293888  04.09.08  10:10
+  Padeg.reg               174  22.01.04  15:00
+
+LibrarySmall
+  Except.dic             4804  04.09.08  10:36
+  Padeg.dll            123392  04.09.08  10:23
+  Padeg.reg               174  22.01.04  15:00	
+
+Samples
+  Declension1251.cs     38092  02.11.07  08:39
+  DeclensionBLL.cs      40062  28.02.08  09:05 - исправленная обертка C# от Kirill Zhuklinets
+  Example.bas            4107  13.04.04  10:00
+  foxpro.prg             3476  13.04.05  09:55
+  MacroExl.bas           2835  10.10.01  11:00
+  MacroWrd.bas           2534  10.10.01  11:00
+  Packet_padeg_v3.sql   26763  01.06.04  14:12
+  Padeg.h                1374  21.04.03  16:08
+  Padeg.pll             86016  03.01.06  13:03
+  Padeg.plx             40960  03.01.06  13:03
+  padegFIO.pas          14600  27.01.06  08:26
+  xp_padeg.rar          47653  28.10.03  07:20
+  Справка.dot           54272  15.06.03  15:00
+  Sclonenie.rar        301928  26.06.08  22:35 - комплект под Linux

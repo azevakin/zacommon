@@ -1,7 +1,5 @@
 ' Пример обращения к функциям DLL GetFIOPadegFSAS и GetNominativePadeg
 ' Обращение к другим функциям выполняется аналогично
-' Copyright (c) 2001 Gennady Pokatashkin e-mail: pgl@tut.by
-'                    Sergey Plahov e-mail: S.Plahov@vaz.ru
 
 Option Explicit
 
@@ -15,7 +13,8 @@ Option Explicit
 '           -3 - результат не поместился в буфере
 
 Private Declare Function GetPadeg Lib "Padeg.dll" Alias "GetFIOPadegFSAS" _
-  (ByVal pFIO As String, ByVal nPadeg As Long, ByVal pResult As String, ByRef nLen As Long) As Integer
+  (ByVal pFIO As String, ByVal nPadeg As Long, ByVal pResult As String, _
+   ByRef nLen As Long) As Integer
 
 ' Функция восстановления именительного падежа
 ' Параметры: pFIO    - фамилия, имя, отчество
@@ -32,11 +31,11 @@ Public Function MakePadeg(ByVal cFIO As String, ByVal nPadeg As Long) As String
 Dim tmpS As String
 Dim nLen As Long
 Dim RetVal As Integer
-  If Len(cFIO) = 1 Then Exit Function
   nLen = 255
   tmpS = String(nLen, 0)
   RetVal = GetPadeg(cFIO, nPadeg, tmpS, nLen)
-  If RetVal = -1 Then MsgBox "Недопустимое значение падежа - " & "(" & nPadeg & ")", , "Склонение ФИО"
+  If RetVal = -1 Then MsgBox "Недопустимое значение падежа - " & _
+                             "(" & nPadeg & ")", , "Склонение ФИО"
   MakePadeg = Mid(tmpS, 1, nLen)
 End Function
 
@@ -93,6 +92,6 @@ Dim LocalFIO As String
   ' если попали сюда, значит: 1. в базе не нашлось подходящего ФИО
   '                           2. ФИО для восстановления задано с ошибкой
   '                           3. ФИО из базы склоняется с ошибкой
-  ' в этом случае определяем им. падеж с возможной ошибкой функцией DLL
+  ' в этом случае определяем им. падеж функцией DLL (возможна ошибка восстановления)
   NominativeByBase = Nominative(cFIO) 
 End Function

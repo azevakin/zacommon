@@ -1,0 +1,14 @@
+  Declension1251.cs     38092  02.11.07  08:39 - C# обертка для Padeg.dll
+  DeclensionBLL.cs      40062  28.02.08  09:05 - исправленная обертка C# от Kirill Zhuklinets
+  Example.bas            4107  13.04.04  10:00 - файл с примерами (VB/VBA) 
+  foxpro.prg             3476  13.04.05  09:55 - пример использования в Visual FoxPRO
+  MacroExl.bas           2835  10.10.01  11:00 - макросы для MS Excel
+  MacroWrd.bas           2534  10.10.01  11:00 - макросы для MS Word
+  Packet_padeg_v3.sql   26763  01.06.04  14:12 - скрипт Oracle
+  Padeg.h                1374  21.04.03  16:08 -
+  Padeg.pll             86016  03.01.06  13:03 - текст библиотеки на pl/sql для Oracle Forms
+  Padeg.plx             40960  03.01.06  13:03 - компилированная библиотека для Oracle Forms
+  padegFIO.pas          14600  27.01.06  08:26 - модуль Object Pascal
+  xp_padeg.rar          47653  28.10.03  07:20 - скрипт MS SQLServer 2000
+  Справка.dot           54272  15.06.03  15:00 - шаблон MS Word
+  Sclonenie.rar        301928  26.06.08  22:35 - комплект под Linux
