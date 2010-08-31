@@ -14,6 +14,9 @@ Type
     LastName, FirstName, MiddleName : String;
   end;
 
+function boolSex(const ASex: Char): Boolean; overload;
+function boolSex(const ASex: string): Boolean; overload;
+
 // ф-ции склонения
 function GetIFPadeg(pFirstName,
                     pLastName: String;
@@ -478,6 +481,22 @@ begin
     raise Exception.Create('Функция ''SetDictionary'' в библиотеке PADEG.DLL не найдена');
   end;
   Result:=pSetDictionary(PChar(FileName));
+end;
+
+function boolSex(const ASex: Char): Boolean; overload;
+begin
+  if ASex in ['м','М'] then
+    Result := True
+  else
+    Result := False;
+end;
+
+function boolSex(const ASex: string): Boolean; overload;
+begin
+  if ASex <> '' then
+    Result := boolSex(ASex[1])
+  else
+    Result := True;
 end;
 
 initialization
