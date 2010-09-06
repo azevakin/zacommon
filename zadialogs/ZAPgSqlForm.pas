@@ -6,6 +6,11 @@ uses
   Classes, Forms, DB, ZConvert, ZPgSqlCon, ZPgSqlTr, ZPgSqlQuery, SysUtils;
 
 type
+  TQueryRec = record
+    Data: TZPgSqlQuery;
+    FreeQuery: Boolean;
+  end;
+
   TParams = DB.TParams;
 
   TField = DB.TField;
@@ -27,6 +32,8 @@ type
     function ExecQuery(const SQL: string): TZPgSqlQuery; overload;
     function OpenQuery(const SQL: string; const Args: array of const): TZPgSqlQuery; overload;
     function OpenQuery(const SQL: string): TZPgSqlQuery; overload;
+    function OpenQuery(const SQL: string; const Args: array of const; const FreeQuery: Boolean): TQueryRec; overload;
+    function OpenQuery(const SQL: string; const FreeQuery: Boolean): TQueryRec; overload;
     procedure SetTransaction(const tr: TZPgSqlTransact); virtual;
   public
     constructor Create(AOwner: TComponent; ATransaction: TZPgSqlTransact); reintroduce; virtual;
@@ -36,7 +43,7 @@ type
     property Transaction: TZPgSqlTransact read FTransaction write SetTransaction;
   end;
 
-  
+
   TConnectOptions = class(TComponent)
   private
     FTransaction: TZPgSqlTransact;
@@ -58,6 +65,7 @@ type
 
   function ConnectOptionsKey(const ApplicationKey: string; const NewStyle: Boolean=False): string;
   function EHasText(e: Exception; const text: string): Boolean;
+  function QueryRec(const Query: TZPgSqlQuery; const FreeQuery: Boolean = False): TQueryRec;
 
 implementation
 
@@ -78,6 +86,12 @@ end;
 function EHasText(e: Exception; const text: string): Boolean;
 begin
   Result := Pos(AnsiLowerCase(text), AnsiLowerCase(e.Message)) > 0;
+end;
+
+function QueryRec(const Query: TZPgSqlQuery; const FreeQuery: Boolean = False): TQueryRec;
+begin
+  Result.Data := Query;
+  Result.FreeQuery := FreeQuery;
 end;
 
 { TPgSqlForm }
@@ -179,6 +193,19 @@ procedure TPgSqlForm.SetTransaction(const tr: TZPgSqlTransact);
 begin
   if FTransaction <> tr then
     FTransaction := tr;
+end;
+
+function TPgSqlForm.OpenQuery(const SQL: string;
+  const Args: array of const; const FreeQuery: Boolean): TQueryRec;
+begin
+  Result.Data := Self.OpenQuery(SQL, Args);
+  Result.FreeQuery := FreeQuery;
+end;
+
+function TPgSqlForm.OpenQuery(const SQL: string;
+  const FreeQuery: Boolean): TQueryRec;
+begin
+  Result := Self.OpenQuery(SQL, [], FreeQuery);
 end;
 
 { TConnectOptions }
