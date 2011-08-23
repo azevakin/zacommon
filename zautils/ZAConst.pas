@@ -26,6 +26,8 @@ const
 
   whereTpl: array[Boolean] of string = (' and ', 'where ');
 
+  notTpl: array[Boolean] of string = (' not ', '');
+
   SPleaseWait = 'Пожалуйста подождите...';
   SLoadingData = 'Загружаются данные...';
   SNotDataForReport = 'Нет данных удовлетворяющих заданному условию.';
