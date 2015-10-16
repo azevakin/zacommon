@@ -1,7 +1,0 @@
-Steps:
-
-1)  Rename dbase\ZMS*.pas ZSy*.pas
-2)  Rename dbase\ZLibMSSQL.pas ZLibSySQL.pas
-3)  Rename dbase\ZDirMSSQL.pas ZDirSySQL.pas
-4)  Rename dbase\ZMS*.dcr ZSy*.dcr
-5)  Modify ZSy*.dcr and make the dcr's reflect class names of: ZSy instead of ZMS
